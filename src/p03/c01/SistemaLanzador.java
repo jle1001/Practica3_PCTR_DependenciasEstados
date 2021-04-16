@@ -1,9 +1,11 @@
-package p03.c01;
+package src.p03.c01;
 
 public class SistemaLanzador {
 	public static void main(String[] args) {
 		
-		IParque parque = new Parque(); // TODO
+		final int aforo = 50; // variable con el aforo máximo permitido
+		
+		IParque parque = new Parque(aforo); // añadido el parámetro aforo en la instanciación del parque
 		char letra_puerta = 'A';
 		
 		System.out.println("¡Parque abierto!");
@@ -14,13 +16,11 @@ public class SistemaLanzador {
 			
 			// Creación de hilos de entrada
 			ActividadEntradaPuerta entradas = new ActividadEntradaPuerta(puerta, parque);
-			new Thread (entradas).start();
+			new Thread(entradas).start();
 			
-			// 
-			// TODO
-			//
-			
-			
+			// Creación de hilos de salida
+			ActividadSalidaPuerta salidas = new ActividadSalidaPuerta(puerta, parque);
+			new Thread(salidas).start();
 		}
 	}	
 }
